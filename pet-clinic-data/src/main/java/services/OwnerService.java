@@ -1,4 +1,4 @@
-package com.ciaranmckenna.petclinic.model.services;
+package services;
 
 import com.ciaranmckenna.petclinic.model.Owner;
 
