@@ -1,4 +1,4 @@
-package services;
+package com.ciaranmckenna.petclinic.services;
 
 import com.ciaranmckenna.petclinic.model.Pet;
 
