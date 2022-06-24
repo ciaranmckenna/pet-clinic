@@ -1,6 +1,7 @@
-package com.ciaranmckenna.petclinic.services;
+package com.ciaranmckenna.petclinic.services.map;
 
 import com.ciaranmckenna.petclinic.model.PetType;
+import com.ciaranmckenna.petclinic.services.PetTypeService;
 import com.ciaranmckenna.petclinic.services.map.AbstractMapService;
 import org.springframework.stereotype.Service;
 
