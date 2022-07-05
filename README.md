@@ -5,11 +5,6 @@
 Spring Boot Framework Pet Clinic App based on the classic Spring Version Pet Clinic.
 Learning about the advantages of Spring Boot.
 
-## 🚀 Getting Started
-
-These instructions will get you a copy of the project up and running on
-your local machine for development and testing purposes.
-
 ### Prerequisites
 
 Ensure you have Java 11 or higher installed on your machine. To check,
@@ -23,3 +18,15 @@ Once installed,
 you should also have access to `javac`. You can check this by running:
 
 `javac --version`11
+
+## 🚀 Getting Started
+
+These instructions will get you a copy of the project up and running on
+your local machine for development and testing purposes.
+
+To run this locally, use this command in your terminal: java -jar TODO
+
+To run as a Docker image with Spring profiles ('prod') run: docker run -e TODO
+
+To run with docker-compose docker-compose build && docker-compose up
+
