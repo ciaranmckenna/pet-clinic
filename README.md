@@ -6,7 +6,6 @@ Spring Boot Framework Pet Clinic App based on the classic Spring Version Pet Cli
 Learning about the advantages of Spring Boot.
 
 ## 🚀 Getting Started
----------------
 
 These instructions will get you a copy of the project up and running on
 your local machine for development and testing purposes.
