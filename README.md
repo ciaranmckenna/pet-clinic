@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ciaranmckenna/pet-clinic/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ciaranmckenna/pet-clinic/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ciaranmckenna/pet-clinic/tree/main.svg?style=svg&circle-token=a45263721fdb7e0f67095142766dbe1e21c2b256)](https://dl.circleci.com/status-badge/redirect/gh/ciaranmckenna/pet-clinic/tree/main)
 
 # pet-clinic
 
