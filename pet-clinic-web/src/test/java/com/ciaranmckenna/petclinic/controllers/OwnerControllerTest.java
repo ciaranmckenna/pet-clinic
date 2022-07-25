@@ -47,7 +47,6 @@ class OwnerControllerTest {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(controller)
                 .build();
-
     }
 
     @ParameterizedTest
