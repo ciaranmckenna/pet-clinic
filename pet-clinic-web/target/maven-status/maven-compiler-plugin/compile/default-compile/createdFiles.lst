@@ -1,6 +1,6 @@
-com\ciaranmckenna\petclinic\controllers\VetController.class
-com\ciaranmckenna\petclinic\controllers\ErrorController.class
-com\ciaranmckenna\petclinic\PetClinicApplication.class
-com\ciaranmckenna\petclinic\bootstrap\DataLoader.class
-com\ciaranmckenna\petclinic\controllers\OwnerController.class
-com\ciaranmckenna\petclinic\controllers\IndexController.class
+com/ciaranmckenna/petclinic/controllers/ErrorController.class
+com/ciaranmckenna/petclinic/PetClinicApplication.class
+com/ciaranmckenna/petclinic/bootstrap/DataLoader.class
+com/ciaranmckenna/petclinic/controllers/IndexController.class
+com/ciaranmckenna/petclinic/controllers/OwnerController.class
+com/ciaranmckenna/petclinic/controllers/VetController.class
