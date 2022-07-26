@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -19,14 +20,19 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith({MockitoExtension.class})
 class OwnerControllerTest {
 
+    public static final String OWNER_NEW = "/owners/new";
+    public static final String OWNERS_CREATE_OR_UPDATE_OWNER_FORM = "owners/createOrUpdateOwnerForm";
+    public static final String REDIRECT_OWNERS_1 = "redirect:/owners/1";
+    public static final String OWNERS_OWNERS_LIST = "owners/ownersList";
+    public static final String OWNERS = "/owners";
     @Mock
     OwnerService ownerService;
 
@@ -65,9 +71,9 @@ class OwnerControllerTest {
                 .thenReturn(Arrays.asList(Owner.builder().id(1L).build(),
                 Owner.builder().id(2L).build()));
 
-        mockMvc.perform(get("/owners"))
+        mockMvc.perform(get(OWNERS))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/ownersList"))
+                .andExpect(view().name(OWNERS_OWNERS_LIST))
                 .andExpect(model().attribute("selections", hasSize(2)));
     }
 
@@ -75,7 +81,7 @@ class OwnerControllerTest {
     void processFindFormReturnOne() throws Exception {
         when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
 
-        mockMvc.perform(get("/owners"))
+        mockMvc.perform(get(OwnerControllerTest.OWNERS))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
     }
@@ -87,11 +93,10 @@ class OwnerControllerTest {
                 Owner.builder().id(2L).build(),
                 Owner.builder().id(3L).build()));
 
-        mockMvc.perform(get("/owners"))
+        mockMvc.perform(get(OWNERS))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/ownersList"))
+                .andExpect(view().name(OWNERS_OWNERS_LIST))
                 .andExpect(model().attribute("selections", hasSize(3)));
-
     }
 
     @Test
@@ -102,5 +107,51 @@ class OwnerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/ownerDetails"))
                 .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
+    }
+
+    @Test
+    void initCreationForm() throws Exception {
+        mockMvc.perform(get(OWNER_NEW))
+                .andExpect(status().isOk())
+                .andExpect(view().name(OWNERS_CREATE_OR_UPDATE_OWNER_FORM))
+                .andExpect(model().attributeExists("owner"));
+
+        verifyNoInteractions(ownerService);
+    }
+
+    @Test
+    void processCreationForm() throws Exception{
+        when(ownerService.save(ArgumentMatchers.any())).thenReturn(Owner.builder().id(1L).build());
+
+        mockMvc.perform(post(OWNER_NEW))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name(REDIRECT_OWNERS_1))
+                .andExpect(model().attributeExists("owner"));
+
+        verify(ownerService).save(ArgumentMatchers.any());
+    }
+
+    @Test
+    void initUpdateOwnerForm() throws Exception {
+        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
+
+        mockMvc.perform(get("/owners/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(OWNERS_CREATE_OR_UPDATE_OWNER_FORM))
+                .andExpect(model().attributeExists("owner"));
+
+        verifyNoMoreInteractions(ownerService);
+    }
+
+    @Test
+    void processUpdateOwnerForm() throws Exception {
+        when(ownerService.save(ArgumentMatchers.any())).thenReturn(Owner.builder().id(1l).build());
+
+        mockMvc.perform(post("/owners/1/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name(REDIRECT_OWNERS_1))
+                .andExpect(model().attributeExists("owner"));
+
+        verify(ownerService).save(ArgumentMatchers.any());
     }
 }
